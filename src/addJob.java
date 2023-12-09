@@ -14,8 +14,9 @@ public class addJob implements ActionListener {
     private JButton btu_confirm;
     private JTextField companyName_txt, position_txt, salary_txt;
     private ArrayList<Company> addCompanyToCSV;
-    private String now;
-    private PrintWriter out;
+    private String now, newID;
+    JFrame frame;
+    private startScreen StartScreen;
     public addJob() {
         ///// JFrame setup
         JFrame frame = new JFrame();
@@ -61,8 +62,11 @@ public class addJob implements ActionListener {
             String addCompanyName = companyName_txt.getText();
             String addPosition = position_txt.getText();
             String addSalary = salary_txt.getText();
-            String newid = "4";
-
+            try (PrintWriter out = new PrintWriter(new File("src\\Jobs.csv"))){
+            out.println(newID + "," + addCompanyName + "," + addPosition + "," + addSalary + "," + currentDate());
+            } catch (FileNotFoundException exception){
+                JOptionPane.showMessageDialog(frame,"Cannot find file!", "Warning!" , JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 
@@ -71,6 +75,11 @@ public class addJob implements ActionListener {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         now = LocalDateTime.now().format(formatter);
         return now;
+    }
+
+    public void getID(String id) {
+        int tempID = Integer.parseInt(id) + 1;
+        newID = Integer.toString(tempID);
     }
 
 }

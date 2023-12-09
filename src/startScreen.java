@@ -3,14 +3,18 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class startScreen implements ActionListener {
     private JButton btu_add, btu_jobFound, btu_update;
     private JTextField countNum_txt;
-    private String Counter;
-    private addJob addJobScreen;
+    private ArrayList<Company> arrayList;
+    private String maxID;
+    private readJobList ReadJobList; private addJob AddJob;
+
     public startScreen() {
         ///// JFrame set up
         JFrame frame = new JFrame();
@@ -35,7 +39,7 @@ public class startScreen implements ActionListener {
         JLabel topText = new JLabel("Tally Counter! See how many jobs you have applied!", SwingConstants.CENTER);
         topText.setFont(font1);
 
-        countNum_txt = new JTextField(Counter);
+        countNum_txt = new JTextField();
         countNum_txt.setPreferredSize(new Dimension(150,150));
         countNum_txt.setFont(font2);
         countNum_txt.setHorizontalAlignment(JTextField.CENTER);
@@ -50,6 +54,7 @@ public class startScreen implements ActionListener {
         btu_jobFound = new JButton("Check applied jobs");
         btu_jobFound.addActionListener(this);
 
+        arrayList = new ArrayList<>();
         ///// Adding items to Panels and Frame
         title.add(topText);
         frame.add(title);
@@ -63,40 +68,46 @@ public class startScreen implements ActionListener {
         frame.setVisible(true);
     }
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == btu_add) {
-            addJob addJob = new addJob();
-        }
-        if(e.getSource() == btu_jobFound) {
-            readJobList jobList = new readJobList();
-        }
         if(e.getSource() == btu_update) {
-            Scanner scanner_file = new Scanner(selectedFile);
-            scanner_file.nextLine();
-            while (scanner_file.hasNextLine()) {
+            try {
+                arrayList.clear();
+                File selectedFile = new File("src\\Jobs.csv");
+                Scanner scanner_file = new Scanner(selectedFile);
+                scanner_file.nextLine();
+                while (scanner_file.hasNextLine()) {
 
-                String row = scanner_file.nextLine();
+                    String row = scanner_file.nextLine();
 
-                String[] parts = row.split(",");
+                    String[] parts = row.split(",");
 
-                String ID = parts[0];
-                String Company = parts[1];
-                String Position = parts[2];
-                String Salary = parts[3];
-                String Date = parts[4];
+                    String ID = parts[0];
+                    String Company = parts[1];
+                    String Position = parts[2];
+                    String Salary = parts[3];
+                    String Date = parts[4];
 
-                companyList.addRow(new Object[]{ID, Company, Position, Salary, Date});
-                Company list = new Company(ID, Company, Position, Salary, Date);
-                arrayList.add(list);
+                    Company list = new Company(Integer.parseInt(ID), Company, Position, Salary, Date);
+                    arrayList.add(list);
+                }
+                appendTheList(arrayList);
+                ReadJobList.getTable(arrayList);
+                AddJob.getID(maxID);
+            }   catch(FileNotFoundException e2){
+                throw new RuntimeException(e2);
+            }
         }
     }
+    public void appendTheList(ArrayList<Company> listForJTable) {
+        int tempMaxID = 0;
+        for (int i = 1; i <= listForJTable.size() ; i++) {
+            tempMaxID = i;
+        }
+        maxID = Integer.toString(tempMaxID);
+        countNum_txt.setText(maxID);
+    }
+    public void passReadJobList(readJobList ReadJobList){ this.ReadJobList = ReadJobList; }
 
-//    public void counterNum(ArrayList<Company> counterNum_list) {
-//        int MaxCounter = 0;
-//        for (int i = 0; i < counterNum_list.size() ; i++) {
-//            if(MaxCounter < counterNum_list.get(i).getId()){
-//                MaxCounter = counterNum_list.get(i).getId();
-//            }
-//        }
-//        Counter = Integer.toString(MaxCounter);
-//    }
+    public void passAddJob(addJob AddJob){ this.AddJob = AddJob; }
+
 }
+

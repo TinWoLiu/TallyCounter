@@ -3,11 +3,11 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class Company {
-    private String id, companyName, position, date, salary;
-    //private int id;
+    private String companyName, position, date, salary;
+    private int id;
 
 
-    public Company(String id, String companyName, String position, String salary, String date) {
+    public Company(int id, String companyName, String position, String salary, String date) {
         this.id = id;
         this.companyName = companyName;
         this.position = position;
@@ -23,9 +23,9 @@ public class Company {
 
     public void setPosition(String position) {this.position = position;}
 
-    public String getId() {return id;}
+    public int getId() {return id;}
 
-    public void setId(String id) {this.id = id;}
+    public void setId(int id) {this.id = id;}
 
     public String getSalary() {
         return salary;

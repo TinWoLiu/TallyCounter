@@ -10,11 +10,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class readJobList implements ActionListener, ListSelectionListener {
     private DefaultTableModel companyList;
@@ -23,12 +19,12 @@ public class readJobList implements ActionListener, ListSelectionListener {
     private JTextArea jta;
     private JButton btu_populateList;
     private JTextField searchBar;
-    private JFrame frame;
+    private startScreen StartScreen;
     private TableRowSorter<TableModel> rowSorter; // Row sorter class for the filter function
                                                     // to make search function easy
     public readJobList() {
         ///// JFrame setup
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setTitle("Jobs you have applied");
         frame.setLayout(new FlowLayout());
 
@@ -116,34 +112,7 @@ public class readJobList implements ActionListener, ListSelectionListener {
         @Override
         public void actionPerformed (ActionEvent e){
             if (e.getSource() == btu_populateList) {
-                companyList.setRowCount(0);
-                File selectedFile = new File("src\\Jobs.csv");
-                try {
-                    Scanner scanner_file = new Scanner(selectedFile);
-                    scanner_file.nextLine();
-                    while (scanner_file.hasNextLine()) {
-
-                        String row = scanner_file.nextLine();
-
-                        String[] parts = row.split(",");
-
-                        String ID = parts[0];
-                        String Company = parts[1];
-                        String Position = parts[2];
-                        String Salary = parts[3];
-                        String Date = parts[4];
-
-                        companyList.addRow(new Object[]{ID, Company, Position, Salary, Date});
-                        Company list = new Company(ID, Company, Position, Salary, Date);
-                        arrayList.add(list);
-                    }
-                } catch (FileNotFoundException e2) {
-                    throw new RuntimeException(e2);
-                }
-                catch (NoSuchElementException e2) {
-                    // catch exception when the csv file is empty and scanner cannot run .nextLine
-                    JOptionPane.showMessageDialog(frame,"The Job list is empty!", "Warning!" , JOptionPane.WARNING_MESSAGE);
-                }
+                getTable(arrayList);
             }
         }
 
@@ -156,4 +125,20 @@ public class readJobList implements ActionListener, ListSelectionListener {
             }
         }
     }
+
+    public void getTable(ArrayList<Company> table) {
+        companyList.setRowCount(0);
+        arrayList = table;
+        for(int i = 0; i < table.size() ; i++) {
+            int getId = table.get(i).getId();
+            String getComName = table.get(i).getCompanyName();
+            String getPosition = table.get(i).getPosition();
+            String getSalary = table.get(i).getSalary();
+            String getDate = table.get(i).getDate();
+
+            companyList.addRow(new Object[]{getId, getComName, getPosition, getSalary, getDate});
+        }
+    }
+
+    public void passStartScreen(startScreen StartScreen) {this.StartScreen = StartScreen; }
 }
