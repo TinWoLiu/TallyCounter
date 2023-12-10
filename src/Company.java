@@ -53,21 +53,4 @@ public class Company {
                 ", salary='" + salary + '\'' +
                 '}';
     }
-    public String AddNewListCSV() {
-        return id + "," + companyName + "," + position + "," + date;
-    }
-
-    private void NewJobToCSV(List<Company> newJobList) {
-        try {
-            PrintWriter out = new PrintWriter("src\\Jobs.csv");
-
-            for (Company NewJob : newJobList) {
-                out.println(NewJob.AddNewListCSV());
-            }
-            System.out.println("New Job added");
-            out.close();
-        }   catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 }

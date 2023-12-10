@@ -73,7 +73,7 @@ public class startScreen implements ActionListener {
                 arrayList.clear();
                 File selectedFile = new File("src\\Jobs.csv");
                 Scanner scanner_file = new Scanner(selectedFile);
-                scanner_file.nextLine();
+                //scanner_file.nextLine();
                 while (scanner_file.hasNextLine()) {
 
                     String row = scanner_file.nextLine();
@@ -91,6 +91,7 @@ public class startScreen implements ActionListener {
                 }
                 appendTheList(arrayList);
                 ReadJobList.getTable(arrayList);
+                AddJob.getArrayList(arrayList);
                 AddJob.getID(maxID);
             }   catch(FileNotFoundException e2){
                 throw new RuntimeException(e2);

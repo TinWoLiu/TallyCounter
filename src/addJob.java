@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ public class addJob implements ActionListener {
     private ArrayList<Company> addCompanyToCSV;
     private String now, newID;
     JFrame frame;
+    private DefaultTableModel TableForFormat;
     private startScreen StartScreen;
     public addJob() {
         ///// JFrame setup
@@ -41,6 +43,7 @@ public class addJob implements ActionListener {
         btu_confirm.addActionListener(this);
 
         addCompanyToCSV = new ArrayList<>();
+        TableForFormat = new DefaultTableModel();
 
         ///// Adding items to Panels and Frame
         addJobPanel.add(companyName);
@@ -59,14 +62,30 @@ public class addJob implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btu_confirm) {
+
             String addCompanyName = companyName_txt.getText();
             String addPosition = position_txt.getText();
             String addSalary = salary_txt.getText();
+
+            Company list = new Company(Integer.parseInt(newID), addCompanyName, addPosition, addSalary, currentDate());
+            addCompanyToCSV.add(list);
+            TableForFormat.addRow(new Object[]{newID,addCompanyName,addPosition, addSalary, currentDate()});
+
+            TableForFormat.addRow(new Object[]{newID, addCompanyName, addPosition, addSalary, currentDate()});
             try (PrintWriter out = new PrintWriter(new File("src\\Jobs.csv"))){
-            out.println(newID + "," + addCompanyName + "," + addPosition + "," + addSalary + "," + currentDate());
+                for (int i = 0 ; i < addCompanyToCSV.size() ; i++) {
+                    int getId = addCompanyToCSV.get(i).getId();
+                    String getComName = addCompanyToCSV.get(i).getCompanyName();
+                    String getPosition = addCompanyToCSV.get(i).getPosition();
+                    String getSalary = addCompanyToCSV.get(i).getSalary();
+                    String getDate = addCompanyToCSV.get(i).getDate();
+                    out.printf("%d,%s,%s,%s,%s\n",getId, getComName, getPosition,getSalary, getDate);
+                }
+
             } catch (FileNotFoundException exception){
                 JOptionPane.showMessageDialog(frame,"Cannot find file!", "Warning!" , JOptionPane.WARNING_MESSAGE);
             }
+
         }
     }
 
@@ -80,6 +99,19 @@ public class addJob implements ActionListener {
     public void getID(String id) {
         int tempID = Integer.parseInt(id) + 1;
         newID = Integer.toString(tempID);
+    }
+
+    public void getArrayList(ArrayList<Company> table) {
+        addCompanyToCSV = table;
+        for(int i = 0; i < table.size() ; i++) {
+            int getId = table.get(i).getId();
+            String getComName = table.get(i).getCompanyName();
+            String getPosition = table.get(i).getPosition();
+            String getSalary = table.get(i).getSalary();
+            String getDate = table.get(i).getDate();
+
+            TableForFormat.addRow(new Object[]{getId, getComName, getPosition, getSalary, getDate});
+        }
     }
 
 }
