@@ -4,7 +4,7 @@ public class Main {
         readJobList read = new readJobList();
         addJob add = new addJob();
 
-        start.passReadJobList(read);
+        start.passReadJobList(read);    // in order to pass the arrays to different classes
         start.passAddJob(add);
     }
 

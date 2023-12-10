@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
@@ -69,11 +67,9 @@ public class addJob implements ActionListener {
 
             Company list = new Company(Integer.parseInt(newID), addCompanyName, addPosition, addSalary, currentDate());
             addCompanyToCSV.add(list);
-            TableForFormat.addRow(new Object[]{newID,addCompanyName,addPosition, addSalary, currentDate()});
 
-            TableForFormat.addRow(new Object[]{newID, addCompanyName, addPosition, addSalary, currentDate()});
             try (PrintWriter out = new PrintWriter(new File("src\\Jobs.csv"))){
-                for (int i = 0 ; i < addCompanyToCSV.size() ; i++) {
+                for (int i = 0 ; i < addCompanyToCSV.size() ; i++) { // loop to print correctly
                     int getId = addCompanyToCSV.get(i).getId();
                     String getComName = addCompanyToCSV.get(i).getCompanyName();
                     String getPosition = addCompanyToCSV.get(i).getPosition();
@@ -103,15 +99,6 @@ public class addJob implements ActionListener {
 
     public void getArrayList(ArrayList<Company> table) {
         addCompanyToCSV = table;
-        for(int i = 0; i < table.size() ; i++) {
-            int getId = table.get(i).getId();
-            String getComName = table.get(i).getCompanyName();
-            String getPosition = table.get(i).getPosition();
-            String getSalary = table.get(i).getSalary();
-            String getDate = table.get(i).getDate();
-
-            TableForFormat.addRow(new Object[]{getId, getComName, getPosition, getSalary, getDate});
-        }
     }
 
 }

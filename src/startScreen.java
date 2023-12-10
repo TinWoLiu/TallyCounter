@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class startScreen implements ActionListener {
-    private JButton btu_add, btu_jobFound, btu_update;
+    private JButton btu_update;
     private JTextField countNum_txt;
     private ArrayList<Company> arrayList;
     private String maxID;
@@ -48,12 +48,6 @@ public class startScreen implements ActionListener {
         btu_update = new JButton("Update");
         btu_update.addActionListener(this);
 
-        btu_add = new JButton("Add job");
-        btu_add.addActionListener(this);
-
-        btu_jobFound = new JButton("Check applied jobs");
-        btu_jobFound.addActionListener(this);
-
         arrayList = new ArrayList<>();
         ///// Adding items to Panels and Frame
         title.add(topText);
@@ -61,7 +55,6 @@ public class startScreen implements ActionListener {
         frame.add(btu_update);
         counterMain.add(countNum_txt);
         frame.add(counterMain);
-        frame.add(btu_add); frame.add(btu_jobFound);
 
         frame.setSize(600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +84,7 @@ public class startScreen implements ActionListener {
                 }
                 appendTheList(arrayList);
                 ReadJobList.getTable(arrayList);
-                AddJob.getArrayList(arrayList);
+                AddJob.getArrayList(arrayList);     // pass for the current arraylist to readJob and addJob classes
                 AddJob.getID(maxID);
             }   catch(FileNotFoundException e2){
                 throw new RuntimeException(e2);
@@ -103,7 +96,8 @@ public class startScreen implements ActionListener {
         for (int i = 1; i <= listForJTable.size() ; i++) {
             tempMaxID = i;
         }
-        maxID = Integer.toString(tempMaxID);
+        maxID = Integer.toString(tempMaxID);    // the current number for the textfield for the counter is based on
+                                                // the ID
         countNum_txt.setText(maxID);
     }
     public void passReadJobList(readJobList ReadJobList){ this.ReadJobList = ReadJobList; }

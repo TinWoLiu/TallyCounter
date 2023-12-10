@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4749e07-f7dd-46f9-8e2b-dff37a3e4b74" name="Changes" comment="Most function working except addJob do not print in new line">
+    <list default="true" id="b4749e07-f7dd-46f9-8e2b-dff37a3e4b74" name="Changes" comment="All function working print correctly">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Company.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/addJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addJob.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/startScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/startScreen.java" afterDir="false" />
     </list>
@@ -25,6 +25,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="5fae1159-0618-49c3-89b1-4825f8712986" />
+        <option name="url" value="https://github.com/TinWoLiu/TallyCounter" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -42,7 +55,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Timmy Liu/Documents/AIT/Computer Engineering/Software Development/3.1/tallyCounter",
+    "last_opened_file_path": "C:/Users/Timmy Liu/Documents/AIT/Computer Engineering/Software Development/3.1/exam2_test/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,7 +80,8 @@
       <workItem from="1701998763804" duration="6176000" />
       <workItem from="1702011766398" duration="21714000" />
       <workItem from="1702132587246" duration="18648000" />
-      <workItem from="1702173168688" duration="6354000" />
+      <workItem from="1702173168688" duration="7086000" />
+      <workItem from="1702181944486" duration="2483000" />
     </task>
     <task id="LOCAL-00001" summary="Version when Jtable read is working">
       <option name="closed" value="true" />
@@ -85,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702150603152</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="All function working print correctly">
+      <created>1702181191774</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702181191774</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,7 +126,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Version when Jtable read is working" />
     <MESSAGE value="Most function working except addJob do not print in new line" />
-    <option name="LAST_COMMIT_MESSAGE" value="Most function working except addJob do not print in new line" />
+    <MESSAGE value="All function working print correctly" />
+    <option name="LAST_COMMIT_MESSAGE" value="All function working print correctly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
